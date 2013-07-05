@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This will call the necessary Python scripts to download the latest
+# Moves data via their API, then write it to one file per month.
+
+# Redirect stdout ( > ) into a named pipe ( >() ) running "tee"
+# exec > >(tee openpaths.log)
+exec >> moves.log  # Redirect just to logfile
+exec 2>&1  # To get errors too
+
+echo ""
+echo $(date +%m_%d_%y-%H.%M.%S)
+echo "====================================="
+echo "Starting Moves download and merge"
+DATAFILENAME=$1_$(date +%Y%m).json
+python moves_onetime_dl.py $(date +%Y-%m) $DATAFILENAME # Get the latest data
+echo ""
+
+echo $(date +%m_%d_%y-%H.%M.%S)
+echo "Moves download complete."
+echo "====================================="
+echo ""

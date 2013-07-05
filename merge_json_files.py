@@ -34,7 +34,7 @@ print `records_read` + ' records read.'
 merged_data = [dict(t) for t in set([tuple(sorted(d.items())) for d in data])]
 if len(merged_data) > max(len(d1), len(d2)):
     with open(fnout,'w') as outfile:
-        json.dump(merged_data, outfile, indent=4)
+        json.dump(merged_data, outfile)
         records_written += len(merged_data)
     print datetime.datetime.now()
     print `records_written` + ' records written to ' + fnout + '.'
