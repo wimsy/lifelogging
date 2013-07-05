@@ -1,0 +1,11 @@
+config.py
+venv/
+*.pyc
+*.json
+bak/
+*.kml
+data/
+tmp/
+keys/
+.DS_Store
+*.log

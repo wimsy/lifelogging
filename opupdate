@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This will call the necessary Python scripts to download the latest
+# OpenPaths data via their API, then merge the new data with existing data.
+
+# Redirect stdout ( > ) into a named pipe ( >() ) running "tee"
+# exec > >(tee openpaths.log)
+exec >> openpaths.log  # Redirect just to logfile
+exec 2>&1  # To get errors too
+
+echo ""
+echo $(date +%m_%d_%y-%H.%M.%S)
+echo "====================================="
+echo "Starting OpenPaths download and merge"
+python openpaths_dl.py  # Get the latest data
+echo ""
+
+# Merge with existing data
+python merge_json_files.py $1 tmp/openpaths_dl.json $2
+
+echo $(date +%m_%d_%y-%H.%M.%S)
+echo "OpenPaths download and merge complete."
+echo "====================================="
+echo ""
