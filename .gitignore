@@ -4,8 +4,8 @@ venv/
 *.json
 bak/
 *.kml
-data/
-tmp/
-keys/
+data/*
+tmp/*
+keys/*
 .DS_Store
 *.log
