@@ -17,6 +17,7 @@ import time
 import sys
 from calendar import monthrange
 import json
+import gzip
 
 outpath = sys.argv[1]
 
@@ -45,8 +46,9 @@ while dl_date <= end_date:
     # Write a file and clear at the end of a month
     
     if dl_date.day == monthrange(dl_date.year, dl_date.month)[1]:
-        outfilename = outpath + dl_date.strftime('moves_storyline_%Y-%m.json')
-        with open(outfilename, 'w') as outfile:
+        outfilename = outpath + \
+                        dl_date.strftime('moves_storyline_%Y-%m.json.gz')
+        with gzip.open(outfilename, 'wb') as outfile:
             json.dump(storyline_data, outfile)
         print datetime.now()
         print 'Wrote %d records to %s' % (len(storyline_data), outfilename)
@@ -57,8 +59,8 @@ while dl_date <= end_date:
 
 # Write remaining data
 
-outfilename = outpath + dl_date.strftime('moves_storyline_%Y-%m.json')
-with open(outfilename, 'w') as outfile:
+outfilename = outpath + dl_date.strftime('moves_storyline_%Y-%m.json.gz')
+with gzip.open(outfilename, 'wb') as outfile:
     json.dump(storyline_data, outfile)
 print datetime.now()
 print 'Wrote %d records to %s' % (len(storyline_data), outfilename)

@@ -15,7 +15,7 @@ echo "Starting OpenPaths download and merge"
 python openpaths_dl.py  # Get the latest data
 echo ""
 
-# Merge with existing data
+# Merge with existing data (assume input and output are gzipped)
 python merge_json_files.py $1 tmp/openpaths_dl.json $2
 
 echo $(date +%m_%d_%y-%H.%M.%S)
