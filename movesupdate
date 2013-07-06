@@ -11,9 +11,9 @@ exec 2>&1  # To get errors too
 echo ""
 echo $(date +%m_%d_%y-%H.%M.%S)
 echo "====================================="
-echo "Starting Moves download and merge"
-DATAFILENAME=$1_$(date +%Y%m).json
-python moves_onetime_dl.py $(date +%Y-%m) $DATAFILENAME # Get the latest data
+echo "Starting Moves download."
+DATAPATH=$1
+python moves_dl.py $DATAPATH # Get the latest data
 echo ""
 
 echo $(date +%m_%d_%y-%H.%M.%S)

@@ -10,7 +10,7 @@ Example usage: python moves_onetime_dl.py 2013-07 outfile.json
 
 from moves import MovesClient
 from config import MOVES_CLIENT_ID, MOVES_CLIENT_SECRET, MOVES_ACCESS_TOKEN
-from config import MOVES_FIRST_DATE
+from config import MOVES_FIRST_DATE, MOVES_BACKLOG_WINDOW
 from datetime import date, timedelta
 import time
 import sys
