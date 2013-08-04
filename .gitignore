@@ -9,3 +9,5 @@ tmp/*
 keys/*
 .DS_Store
 *.log
+launchd_calls.txt
+pushover_test.py

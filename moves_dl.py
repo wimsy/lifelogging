@@ -9,7 +9,7 @@ Example usage: python moves_dl.py ./data/
 and write files in ./data/
 '''
 
-from moves import MovesClient
+from moves import MovesClient, MovesAPIError
 from config import MOVES_CLIENT_ID, MOVES_CLIENT_SECRET, MOVES_ACCESS_TOKEN
 from config import MOVES_FIRST_DATE, MOVES_BACKLOG_WINDOW
 from datetime import date, timedelta, datetime
@@ -18,6 +18,8 @@ import sys
 from calendar import monthrange
 import json
 import gzip
+
+from extensions import pushover_client
 
 outpath = sys.argv[1]
 
@@ -40,7 +42,13 @@ print 'Downloading Moves storyline from %s to %s' \
         % (start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'))
 while dl_date <= end_date:
     datestr = dl_date.strftime('%Y-%m-%d')
-    new_storyline = moves.user_storyline_daily(datestr, trackPoints='true')
+    try:
+        new_storyline = moves.user_storyline_daily(datestr, trackPoints='true')
+    except MovesAPIError as e:
+        error_str = 'Error downloading Moves storyline data from ' + datastr + ':' + e
+        pushover_client.send_message(error_str, title='Data Downloader')
+        break
+        
     storyline_data.extend(new_storyline)
     
     # Write a file and clear at the end of a month

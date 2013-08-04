@@ -13,6 +13,8 @@ import datetime
 import os
 import gzip
 
+from extensions import pushover_client
+
 fn1 = sys.argv[1]
 fn2 = sys.argv[2]
 fnout = sys.argv[3]
@@ -63,3 +65,4 @@ else:
     print fn2 + ': ' + `len(d2)` + ' records'
     print 'Merged result: ' + `len(merged_data)` + ' records'
     print 'No new data found. No data written.'
+    pushover_client.send_message('No new OpenPaths data found or written. Is the application tracking?', title='Data Downloader')

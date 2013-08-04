@@ -19,6 +19,7 @@ Services I plan to add in the future:
 - [RunKeeper](http://runkeeper.com)
 - [Automatic](http://automatic.com) if they add an API
 - [Untappd](http://untappd.com)
+- [Goodreads](http://goodreads.com)
 
 ## Acknowledgements
 

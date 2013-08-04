@@ -3,6 +3,7 @@
 import oauth2, time, urllib, urllib2, json, datetime
 
 from config import OP_ACCESS, OP_SECRET
+from extensions import pushover_client
 
 URL = "https://openpaths.cc/api/1" 
 DLFILENAME = 'tmp/openpaths_dl.json'
@@ -38,8 +39,11 @@ try:
         json.dump(data, dlfile, indent=4)
     print datetime.datetime.now()
     print 'Wrote ' + `num_records` + ' records to ' + DLFILENAME
+    if num_records < 1:
+        pushover_client.send_message('Wrote zero records after download', title='Data Downloader')
 except urllib2.HTTPError as e:
     print datetime.datetime.now()
     print(e.read())    
     print 'OpenPaths data not downloaded.'
+    pushover_client.send_message('OpenPaths data not downloaded.', title='Data Downloader')
     

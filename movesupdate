@@ -12,6 +12,7 @@ echo ""
 echo $(date +%m_%d_%y-%H.%M.%S)
 echo "====================================="
 echo "Starting Moves download."
+which python
 DATAPATH=$1
 python moves_dl.py $DATAPATH # Get the latest data
 echo ""
